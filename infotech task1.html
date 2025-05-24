@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaTech - Future Ready</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body, html {
+      font-family: 'Segoe UI', sans-serif;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    /* Theme Colors */
+    body.home-theme {
+      background-color: #000;
+      color: white;
+    }
+
+    body.about-theme {
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    body.services-theme {
+      background-color: #e0f7fa;
+      color: #111;
+    }
+
+    body.contact-theme {
+      background-color: #ffe0b2;
+      color: #111;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.4s ease;
+      z-index: 999;
+    }
+
+    nav.scrolled {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+      transition: color 0.4s ease;
+    }
+
+    nav.scrolled .logo {
+      color: #111;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    ul li a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    nav.scrolled ul li a {
+      color: #111;
+    }
+
+    ul li a:hover {
+      color: #1e90ff;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    nav.scrolled .menu-toggle {
+      color: #111;
+    }
+
+    header {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 3.8rem;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    section p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      ul {
+        position: absolute;
+        top: 60px;
+        right: 30px;
+        background: white;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        display: none;
+      }
+
+      ul.show {
+        display: flex;
+      }
+
+      ul li a {
+        color: black;
+      }
+
+      nav.scrolled ul li a {
+        color: black;
+      }
+    }
+  </style>
+</head>
+<body class="home-theme">
+
+  <nav id="navbar">
+    <div class="logo">NovaTech</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header id="home">
+    <div>
+      <h1>Innovating the Future</h1>
+      <p>Your partner in digital transformation</p>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About NovaTech</h2>
+    <p>NovaTech is a forward-thinking technology company offering AI, cloud, and IoT solutions for modern businesses. We help companies unlock their digital potential with future-ready tech stacks.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <p>We provide scalable cloud platforms, custom software development, AI integration, and tech consulting. Whether you're a startup or enterprise, NovaTech helps drive innovation at every step.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Get in touch at <strong>hello@novatech.com</strong> or connect with us on LinkedIn and Twitter for updates and insights!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 NovaTech. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const menu = document.getElementById('menu');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    function toggleMenu() {
+      menu.classList.toggle('show');
+    }
+
+    // Section-based theme switching
+    const sections = document.querySelectorAll('section, header');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.className = `${entry.target.id}-theme`;
+        }
+      });
+    }, { threshold: 0.6 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
